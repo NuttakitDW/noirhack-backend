@@ -1,7 +1,7 @@
 import { Elysia, t } from 'elysia';
 import { TypeCompiler } from 'elysia/type-system';
 
-import { tStringEnum } from '../utils';
+import { transformKeysToCamelCase, tStringEnum } from '../utils';
 import {
   decryptOneLayerProve,
   genElgamalKeyPairProve,
@@ -49,7 +49,7 @@ export const proveRoute = new Elysia({ name: 'prove-route' }).post(
     }
 
     const prover = circuitProvers[circuit_name as CircuitName];
-    const result = await prover(data as any);
+    const result = await prover(transformKeysToCamelCase(data));
 
     return {
       ok: true,

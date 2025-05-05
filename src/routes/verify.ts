@@ -25,7 +25,7 @@ export const verifyRoute = new Elysia({ name: 'verify-route' }).post(
     }
 
     const parsedProof = {
-      publicInputs: data.publicInputs,
+      publicInputs: data.public_inputs,
       proof: hexToUint8Array(data.proof.replace(/^0x/, '')),
     };
 
@@ -53,7 +53,7 @@ export const verifyRoute = new Elysia({ name: 'verify-route' }).post(
     body: t.Object({
       circuit_name: tStringEnum(Object.values(CircuitName)),
       data: t.Object({
-        publicInputs: t.Array(t.String()),
+        public_inputs: t.Array(t.String()),
         proof: t.String(),
       }),
     }),

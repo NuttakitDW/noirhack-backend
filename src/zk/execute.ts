@@ -43,10 +43,10 @@ export const decryptOneLayerExecute = async (
     witness: executed.witness,
     outputs: {
       decryptedCard: [
-        (executed.returnValue as any)[0] as BigNumberish,
-        (executed.returnValue as any)[1] as BigNumberish,
+        (executed.returnValue as any)[0][0] as BigNumberish,
+        (executed.returnValue as any)[0][1] as BigNumberish,
       ],
-      decryptComponent: (executed.returnValue as any)[2] as BigNumberish,
+      decryptComponent: (executed.returnValue as any)[1] as BigNumberish,
     },
   };
 };

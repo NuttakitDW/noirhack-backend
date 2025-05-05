@@ -56,3 +56,21 @@ TypeRegistry.Set<TStringEnum>(
 export function hexToUint8Array(hex: string): Uint8Array {
   return new Uint8Array(hex.match(/.{1,2}/g)!.map((byte) => parseInt(byte, 16)));
 }
+
+export function toCamelCase(str: string): string {
+  return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
+}
+
+export function transformKeysToCamelCase(input: any): any {
+  if (Array.isArray(input)) {
+    return input.map(transformKeysToCamelCase);
+  } else if (input !== null && typeof input === 'object') {
+    return Object.entries(input).reduce((acc, [key, value]) => {
+      const camelKey = toCamelCase(key);
+      acc[camelKey] = transformKeysToCamelCase(value);
+      return acc;
+    }, {} as any);
+  } else {
+    return input;
+  }
+}

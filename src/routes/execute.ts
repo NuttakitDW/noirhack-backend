@@ -1,7 +1,7 @@
 import Elysia, { t } from 'elysia';
 import { TypeCompiler } from 'elysia/type-system';
 
-import { tStringEnum } from '../utils';
+import { transformKeysToCamelCase, tStringEnum } from '../utils';
 import {
   decryptOneLayerExecute,
   genElgamalKeyPairExecute,
@@ -49,7 +49,7 @@ export const executeRoute = new Elysia({ name: 'execute-route' }).post(
     }
 
     const executor = circuitExecutors[circuit_name as CircuitName];
-    const result = await executor(data as any);
+    const result = await executor(transformKeysToCamelCase(data));
 
     return {
       ok: true,
