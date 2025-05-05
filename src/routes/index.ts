@@ -1,4 +1,5 @@
 export enum CircuitName {
+  AggregatePublicKeys = 'aggregatePublicKeys',
   GenElgamalKeyPair = 'genElgamalKeyPair',
   DecryptOneLayer = 'decryptOneLayer',
   Shuffle4 = 'shuffle4',

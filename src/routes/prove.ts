@@ -3,6 +3,7 @@ import { TypeCompiler } from 'elysia/type-system';
 
 import { transformKeysToCamelCase, tStringEnum } from '../utils';
 import {
+  aggregatePublicKeysProve,
   decryptOneLayerProve,
   genElgamalKeyPairProve,
   shuffle4Prove,
@@ -12,6 +13,7 @@ import { CircuitName, toHexProof } from '.';
 import { circuitInputSchemas } from './schemas';
 
 export const circuitProvers = {
+  [CircuitName.AggregatePublicKeys]: aggregatePublicKeysProve,
   [CircuitName.GenElgamalKeyPair]: genElgamalKeyPairProve,
   [CircuitName.DecryptOneLayer]: decryptOneLayerProve,
   [CircuitName.Shuffle4]: shuffle4Prove,

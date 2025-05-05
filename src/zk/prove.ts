@@ -1,24 +1,47 @@
 import type { ProofData } from '@aztec/bb.js';
 
 import {
+  aggregatePublicKeysExecute,
   decryptOneLayerExecute,
   genElgamalKeyPairExecute,
   shuffle4Execute,
   verifyCardMessageExecute,
 } from './execute';
 import type {
+  AggregatePublicKeysInputs,
   DecryptOneLayerInputs,
   GenElgamalKeyPairInputs,
   Shuffle4Inputs,
   VerifyCardMessageInputs,
 } from './inputs';
-import { decryptOneLayer, genElgamalKeyPair, shuffle4, verifyCardMessage } from './instances';
+import {
+  aggregatePublicKeys,
+  decryptOneLayer,
+  genElgamalKeyPair,
+  shuffle4,
+  verifyCardMessage,
+} from './instances';
 import type {
+  AggregatePublicKeysOutputs,
   DecryptOneLayerOutputs,
   GenElgamalKeyPairOutputs,
   Shuffle4Outputs,
   VerifyCardMessageOutputs,
 } from './outputs';
+
+export const aggregatePublicKeysProve = async (
+  inputs: AggregatePublicKeysInputs,
+): Promise<{
+  proofData: ProofData;
+  outputs: AggregatePublicKeysOutputs;
+}> => {
+  const executed = await aggregatePublicKeysExecute(inputs);
+  const proved = await aggregatePublicKeys.generateProof(executed.witness);
+  return {
+    proofData: proved,
+    outputs: executed.outputs,
+  };
+};
 
 export const decryptOneLayerProve = async (
   inputs: DecryptOneLayerInputs,

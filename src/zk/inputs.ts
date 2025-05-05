@@ -1,5 +1,21 @@
 import type { BigNumberish } from 'ethers';
 
+export type AggregatePublicKeysInputs = {
+  pks: [
+    BigNumberish,
+    BigNumberish,
+    BigNumberish,
+    BigNumberish,
+    BigNumberish,
+    BigNumberish,
+    BigNumberish,
+    BigNumberish,
+    BigNumberish,
+    BigNumberish,
+  ];
+  numPks: BigNumberish;
+};
+
 export type DecryptOneLayerInputs = {
   g: BigNumberish;
   card: [BigNumberish, BigNumberish];

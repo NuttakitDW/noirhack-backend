@@ -1,10 +1,17 @@
 import Elysia, { t } from 'elysia';
-import { decryptOneLayer, genElgamalKeyPair, shuffle4, verifyCardMessage } from 'zk/instances';
+import {
+  aggregatePublicKeys,
+  decryptOneLayer,
+  genElgamalKeyPair,
+  shuffle4,
+  verifyCardMessage,
+} from 'zk/instances';
 
 import { hexToUint8Array, tStringEnum } from '../utils';
 import { CircuitName } from '.';
 
 const circuitVerifiers = {
+  [CircuitName.AggregatePublicKeys]: aggregatePublicKeys.verifyProof.bind(aggregatePublicKeys),
   [CircuitName.GenElgamalKeyPair]: genElgamalKeyPair.verifyProof.bind(genElgamalKeyPair),
   [CircuitName.DecryptOneLayer]: decryptOneLayer.verifyProof.bind(decryptOneLayer),
   [CircuitName.Shuffle4]: shuffle4.verifyProof.bind(shuffle4),

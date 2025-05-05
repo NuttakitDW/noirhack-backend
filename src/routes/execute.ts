@@ -3,6 +3,7 @@ import { TypeCompiler } from 'elysia/type-system';
 
 import { transformKeysToCamelCase, tStringEnum } from '../utils';
 import {
+  aggregatePublicKeysExecute,
   decryptOneLayerExecute,
   genElgamalKeyPairExecute,
   shuffle4Execute,
@@ -12,6 +13,7 @@ import { CircuitName } from '.';
 import { circuitInputSchemas } from './schemas';
 
 export const circuitExecutors = {
+  [CircuitName.AggregatePublicKeys]: aggregatePublicKeysExecute,
   [CircuitName.GenElgamalKeyPair]: genElgamalKeyPairExecute,
   [CircuitName.DecryptOneLayer]: decryptOneLayerExecute,
   [CircuitName.Shuffle4]: shuffle4Execute,

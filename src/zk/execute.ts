@@ -2,18 +2,52 @@ import type { BigNumberish } from 'ethers';
 
 import { isValidFieldInput } from '../utils';
 import type {
+  AggregatePublicKeysInputs,
   DecryptOneLayerInputs,
   GenElgamalKeyPairInputs,
   Shuffle4Inputs,
   VerifyCardMessageInputs,
 } from './inputs';
-import { decryptOneLayer, genElgamalKeyPair, shuffle4, verifyCardMessage } from './instances';
+import {
+  aggregatePublicKeys,
+  decryptOneLayer,
+  genElgamalKeyPair,
+  shuffle4,
+  verifyCardMessage,
+} from './instances';
 import type {
+  AggregatePublicKeysOutputs,
   DecryptOneLayerOutputs,
   GenElgamalKeyPairOutputs,
   Shuffle4Outputs,
   VerifyCardMessageOutputs,
 } from './outputs';
+
+export const aggregatePublicKeysVerifyInputs = (input: AggregatePublicKeysInputs) => {
+  const valid = input.pks.every(isValidFieldInput) && isValidFieldInput(input.numPks);
+  if (!valid) {
+    throw new Error('aggregatePublic: invalid inputs');
+  }
+};
+
+export const aggregatePublicKeysExecute = async (
+  inputs: AggregatePublicKeysInputs,
+): Promise<{
+  witness: Uint8Array;
+  outputs: AggregatePublicKeysOutputs;
+}> => {
+  aggregatePublicKeysVerifyInputs(inputs);
+
+  const executed = await aggregatePublicKeys.execute({
+    pks: inputs.pks.map((v) => v.toString()),
+    num_pks: inputs.numPks.toString(),
+  });
+
+  return {
+    witness: executed.witness,
+    outputs: executed.returnValue as BigNumberish,
+  };
+};
 
 export const decryptOneLayerVerifyInputs = (input: DecryptOneLayerInputs) => {
   const valid =

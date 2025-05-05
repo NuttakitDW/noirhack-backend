@@ -4,6 +4,10 @@ import { makeDeck, makeMatrix, makeRand } from '../utils';
 import { CircuitName } from '.';
 
 export const circuitInputSchemas = {
+  [CircuitName.AggregatePublicKeys]: Type.Object({
+    pks: makeRand(10),
+    num_pks: Type.String(),
+  }),
   [CircuitName.GenElgamalKeyPair]: Type.Object({
     g: Type.String(),
     r: Type.String(),

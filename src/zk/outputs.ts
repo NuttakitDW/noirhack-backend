@@ -1,5 +1,7 @@
 import type { BigNumberish } from 'ethers';
 
+export type AggregatePublicKeysOutputs = BigNumberish;
+
 export interface DecryptOneLayerOutputs {
   decryptedCard: [BigNumberish, BigNumberish];
   decryptComponent: BigNumberish;
