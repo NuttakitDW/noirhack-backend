@@ -1,0 +1,36 @@
+{
+  "name": "noir",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@aztec/bb.js": "0.72.1",
+    "@elysiajs/swagger": "^1.2.2",
+    "@noir-lang/noir_js": "1.0.0-beta.2",
+    "@sinclair/typebox": "^0.34.33",
+    "async-mutex": "^0.5.0",
+    "elysia": "^1.2.25",
+    "ethers": "^6.13.7",
+    "p-limit": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "8",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.3.1",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "prettier": "^3.5.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "scripts": {
+    "lint": "bunx eslint .",
+    "lint:fix": "bunx eslint . --fix",
+    "format": "bunx prettier . --write",
+    "format:check": "bunx prettier . --check"
+  }
+}
