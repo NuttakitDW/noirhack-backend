@@ -28,6 +28,7 @@
     "typescript": "^5"
   },
   "scripts": {
+    "start": "bun run src/index.ts",
     "lint": "bunx eslint .",
     "lint:fix": "bunx eslint . --fix",
     "format": "bunx prettier . --write",
