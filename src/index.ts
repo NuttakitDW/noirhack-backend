@@ -8,7 +8,6 @@ import { verifyRoute } from './routes/verify';
 const startServer = (port = 3000) => {
   new Elysia({
     serve: {
-      reusePort: true,
       development: false,
     },
   })
