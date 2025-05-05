@@ -21,7 +21,7 @@ export const circuitProvers = {
 export const proveRoute = new Elysia({ name: 'prove-route' }).post(
   '/prove',
   async ({ body }) => {
-    const { circuit_name, data, proof: includeProof } = body;
+    const { circuit_name, data } = body;
 
     if (!(circuit_name in circuitProvers)) {
       return {
@@ -57,9 +57,7 @@ export const proveRoute = new Elysia({ name: 'prove-route' }).post(
       data: {
         outputs: result.outputs,
         public_inputs: result.proofData.publicInputs,
-        ...(includeProof && {
-          proof: toHexProof(result.proofData).proof,
-        }),
+        proof: toHexProof(result.proofData).proof,
       },
     };
   },
@@ -67,11 +65,6 @@ export const proveRoute = new Elysia({ name: 'prove-route' }).post(
     body: t.Object({
       circuit_name: tStringEnum(Object.values(CircuitName)),
       data: t.Unknown(),
-      proof: t.Optional(
-        t.Boolean({
-          default: true,
-        }),
-      ),
     }),
   },
 );

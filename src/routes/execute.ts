@@ -21,7 +21,7 @@ export const circuitExecutors = {
 export const executeRoute = new Elysia({ name: 'execute-route' }).post(
   '/execute',
   async ({ body }) => {
-    const { circuit_name, data, witness: includeWitness } = body;
+    const { circuit_name, data } = body;
 
     if (!(circuit_name in circuitExecutors)) {
       return {
@@ -56,7 +56,7 @@ export const executeRoute = new Elysia({ name: 'execute-route' }).post(
       code: 200,
       data: {
         outputs: result.outputs,
-        ...(includeWitness && { witness: Array.from(result.witness) }),
+        witness: '0x' + Buffer.from(result.witness).toString('hex'),
       },
     };
   },
@@ -64,11 +64,6 @@ export const executeRoute = new Elysia({ name: 'execute-route' }).post(
     body: t.Object({
       circuit_name: tStringEnum(Object.values(CircuitName)),
       data: t.Unknown(),
-      witness: t.Optional(
-        t.Boolean({
-          default: true,
-        }),
-      ),
     }),
   },
 );
