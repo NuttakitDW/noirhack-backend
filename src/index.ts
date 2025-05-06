@@ -32,4 +32,5 @@ const startServer = (port = 3000) => {
   console.log(`📜 Swagger UI at http://localhost:${port}/swagger`);
 };
 
-startServer(3000);
+const port = parseInt(process.argv[2] || '3000', 10);
+startServer(port);
