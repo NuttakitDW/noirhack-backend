@@ -7,7 +7,7 @@ import { transformKeysToCamelCase } from 'utils';
 describe('POST /echo', () => {
   const app = new Elysia().use(executeRoute);
 
-  it('Should response prove data by json body', async () => {
+  it('Should response prove execute by json body', async () => {
     const payload = {
       circuit_name: 'genElgamalKeyPair',
       data: {
@@ -36,5 +36,27 @@ describe('POST /echo', () => {
       ...result,
       witness: '0x' + Buffer.from(result.witness).toString('hex'),
     });
+  });
+
+  it('Should response error from body is number', async () => {
+    const payload = {
+      circuit_name: 'genElgamalKeyPair',
+      data: {
+        g: 5,
+        r: '123456',
+      },
+    };
+
+    const response = await app.handle(
+      new Request('http://localhost/execute', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      }),
+    );
+
+    expect(response.status).toBe(400);
   });
 });
