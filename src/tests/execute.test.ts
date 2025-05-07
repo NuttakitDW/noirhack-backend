@@ -31,11 +31,13 @@ describe('POST /echo', () => {
 
     const json: any = await response.json();
 
-    expect(response.status).toBe(200);
-    expect(json.data).toEqual({
+    const data = {
       ...result,
       witness: '0x' + Buffer.from(result.witness).toString('hex'),
-    });
+    };
+
+    expect(response.status).toBe(200);
+    expect(json.data).toEqual(data);
   });
 
   it('Should response error from body is number', async () => {
