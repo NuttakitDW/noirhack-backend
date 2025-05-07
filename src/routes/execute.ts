@@ -22,10 +22,11 @@ export const circuitExecutors = {
 
 export const executeRoute = new Elysia({ name: 'execute-route' }).post(
   '/execute',
-  async ({ body }) => {
+  async ({ body, set }) => {
     const { circuit_name, data } = body;
 
     if (!(circuit_name in circuitExecutors)) {
+      set.status = 400;
       return {
         ok: false,
         code: 400,
@@ -38,9 +39,9 @@ export const executeRoute = new Elysia({ name: 'execute-route' }).post(
     const errors = [...compiled.Errors(data)];
 
     if (errors.length > 0) {
+      set.status = 400;
       return {
         ok: false,
-        code: 400,
         message: 'Invalid input data',
         debug: errors.map((e) => ({
           path: e.path,
