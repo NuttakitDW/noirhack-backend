@@ -29,7 +29,6 @@ export const executeRoute = new Elysia({ name: 'execute-route' }).post(
       set.status = 400;
       return {
         ok: false,
-        code: 400,
         message: `Unsupported circuit name: ${circuit_name}`,
       };
     }

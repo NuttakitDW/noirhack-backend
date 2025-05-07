@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'bun:test';
 import { Elysia } from 'elysia';
-import { executeRoute } from 'routes/execute';
+import type { CircuitName } from 'routes';
+import { circuitExecutors, executeRoute } from 'routes/execute';
+import { transformKeysToCamelCase } from 'utils';
 
 describe('POST /echo', () => {
   const app = new Elysia().use(executeRoute);
@@ -24,8 +26,15 @@ describe('POST /echo', () => {
       }),
     );
 
+    const executor = circuitExecutors[payload.circuit_name as CircuitName];
+    const result = await executor(transformKeysToCamelCase(payload.data));
+
     const json: any = await response.json();
+
     expect(response.status).toBe(200);
-    console.log(json);
+    expect(json.data).toEqual({
+      ...result,
+      witness: '0x' + Buffer.from(result.witness).toString('hex'),
+    });
   });
 });
