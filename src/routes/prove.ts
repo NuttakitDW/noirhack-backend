@@ -22,13 +22,13 @@ export const circuitProvers = {
 
 export const proveRoute = new Elysia({ name: 'prove-route' }).post(
   '/prove',
-  async ({ body }) => {
+  async ({ body, set }) => {
     const { circuit_name, data } = body;
 
     if (!(circuit_name in circuitProvers)) {
+      set.status = 400;
       return {
         ok: false,
-        code: 400,
         message: `Unsupported circuit name: ${circuit_name}`,
       };
     }
@@ -38,9 +38,9 @@ export const proveRoute = new Elysia({ name: 'prove-route' }).post(
     const errors = [...compiled.Errors(data)];
 
     if (errors.length > 0) {
+      set.status = 400;
       return {
         ok: false,
-        code: 400,
         message: 'Invalid input data',
         debug: errors.map((e) => ({
           path: e.path,
@@ -55,7 +55,6 @@ export const proveRoute = new Elysia({ name: 'prove-route' }).post(
 
     return {
       ok: true,
-      code: 200,
       data: {
         outputs: result.outputs,
         public_inputs: result.proofData.publicInputs,
