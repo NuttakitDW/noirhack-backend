@@ -30,11 +30,10 @@
   },
   "scripts": {
     "start": "bun run src/index.ts",
-    "start:servers": "bash ./start_servers.sh",
-    "benchmark": "bun run benchmark.ts",
     "lint": "bunx eslint .",
     "lint:fix": "bunx eslint . --fix",
     "format": "bunx prettier . --write",
-    "format:check": "bunx prettier . --check"
+    "format:check": "bunx prettier . --check",
+    "test": "bun test"
   }
 }
