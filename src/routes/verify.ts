@@ -27,6 +27,7 @@ export const verifyRoute = new Elysia({ name: 'verify-route' }).post(
       set.status = 400;
       return {
         ok: false,
+        code: 400,
         message: `Unsupported circuit name: ${circuit_name}`,
       };
     }
@@ -43,6 +44,7 @@ export const verifyRoute = new Elysia({ name: 'verify-route' }).post(
 
       return {
         ok: true,
+        code: 200,
         verified,
       };
     } catch (e) {
@@ -50,6 +52,7 @@ export const verifyRoute = new Elysia({ name: 'verify-route' }).post(
 
       return {
         ok: true,
+        code: 200,
         verified: false,
       };
     }

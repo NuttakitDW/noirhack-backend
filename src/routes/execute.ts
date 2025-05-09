@@ -55,6 +55,7 @@ export const executeRoute = new Elysia({ name: 'execute-route' }).post(
 
     return {
       ok: true,
+      code: 200,
       data: {
         outputs: result.outputs,
         witness: '0x' + Buffer.from(result.witness).toString('hex'),
