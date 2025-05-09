@@ -10,7 +10,7 @@ import {
 import { hexToUint8Array, tStringEnum } from '../utils';
 import { CircuitName } from '.';
 
-const circuitVerifiers = {
+export const circuitVerifiers = {
   [CircuitName.AggregatePublicKeys]: aggregatePublicKeys.verifyProof.bind(aggregatePublicKeys),
   [CircuitName.GenElgamalKeyPair]: genElgamalKeyPair.verifyProof.bind(genElgamalKeyPair),
   [CircuitName.DecryptOneLayer]: decryptOneLayer.verifyProof.bind(decryptOneLayer),
