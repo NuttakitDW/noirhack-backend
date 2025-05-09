@@ -7,7 +7,7 @@ import { transformKeysToCamelCase } from 'utils';
 describe('POST /echo', () => {
   const app = new Elysia().use(executeRoute);
 
-  it('Should response prove execute by json body', async () => {
+  it('Should response execute by json body', async () => {
     const payload = {
       circuit_name: 'genElgamalKeyPair',
       data: {
